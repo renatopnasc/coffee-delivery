@@ -10,7 +10,9 @@ import {
 } from "phosphor-react";
 import {
   AddressContainer,
+  AmountContainer,
   CepInput,
+  CheckoutButton,
   CheckoutContainer,
   CityInput,
   ComplementInput,
@@ -25,13 +27,16 @@ import {
   ProductActions,
   ProductDetails,
   ProductInfo,
+  ProductPrice,
   ProductsContainer,
   PuchaseDetailsHeaderContainer,
   PurchaseDetailsContainer,
   RemoveButton,
-  SelectedProdusctsContainer,
+  SelectedProductsContainer,
   StreetInput,
+  TotalContainer,
   UfInput,
+  ValuesContainer,
 } from "./styles";
 
 // Images Import
@@ -94,64 +99,62 @@ export function Checkout() {
         </PaymentContainer>
       </PurchaseDetailsContainer>
 
-      <SelectedProdusctsContainer>
+      <SelectedProductsContainer>
         <h2>Cafés selecionados</h2>
 
         <ProductsContainer>
-          <Product>
-            <ProductInfo>
-              <img src={coffee1} alt="" />
+          <section>
+            <Product>
+              <ProductInfo>
+                <img src={coffee1} alt="" />
 
-              <ProductDetails>
-                <h1>Expresso Tradicional</h1>
+                <ProductDetails>
+                  <h1>Expresso Tradicional</h1>
 
-                <ProductActions>
-                  <Counter>
-                    <button>
-                      <Minus />
-                    </button>
-                    <p>1</p>
-                    <button>
-                      <Plus />
-                    </button>
-                  </Counter>
+                  <ProductActions>
+                    <Counter>
+                      <button>
+                        <Minus size={14} weight="bold" />
+                      </button>
+                      <p>1</p>
+                      <button>
+                        <Plus size={14} weight="bold" />
+                      </button>
+                    </Counter>
 
-                  <RemoveButton>
-                    <Trash size={16} color="#8047f8" /> Remover
-                  </RemoveButton>
-                </ProductActions>
-              </ProductDetails>
-            </ProductInfo>
-          </Product>
+                    <RemoveButton title="Remover produto">
+                      <Trash size={16} />
 
-          <Product>
-            <ProductInfo>
-              <img src={coffee1} alt="" />
+                      <span>remover</span>
+                    </RemoveButton>
+                  </ProductActions>
+                </ProductDetails>
+              </ProductInfo>
 
-              <ProductDetails>
-                <h1>Expresso Tradicional</h1>
+              <ProductPrice>R$ 9,90</ProductPrice>
+            </Product>
+          </section>
 
-                {/* Refazer */}
-                <ProductActions>
-                  <Counter>
-                    <button>
-                      <Minus />
-                    </button>
-                    <p>1</p>
-                    <button>
-                      <Plus />
-                    </button>
-                  </Counter>
+          <footer>
+            <ValuesContainer>
+              <AmountContainer>
+                <p>Total dos itens</p>
+                <p>R$ 29,70</p>
+              </AmountContainer>
+              <AmountContainer>
+                <p>Entrega</p>
+                <p>R$ 3,50</p>
+              </AmountContainer>
+              <TotalContainer>
+                <p>Total</p>
+                <p>R$ 33,20</p>
+              </TotalContainer>
+            </ValuesContainer>
 
-                  <RemoveButton>
-                    <Trash size={16} color="#8047f8" /> Remover
-                  </RemoveButton>
-                </ProductActions>
-              </ProductDetails>
-            </ProductInfo>
-          </Product>
+            <CheckoutButton>confirmar pedido</CheckoutButton>
+          </footer>
         </ProductsContainer>
-      </SelectedProdusctsContainer>
+      </SelectedProductsContainer>
     </CheckoutContainer>
   );
 }

@@ -174,7 +174,7 @@ export const OptionCard = styled.button`
   }
 `;
 
-export const SelectedProdusctsContainer = styled.aside`
+export const SelectedProductsContainer = styled.aside`
   width: 100%;
 
   display: flex;
@@ -193,7 +193,7 @@ export const Product = styled.div`
   width: 100%;
 
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: space-between;
 
   padding: 2rem 0.25rem;
@@ -236,36 +236,29 @@ export const Counter = styled.div`
   justify-content: center;
   gap: 0.25rem;
 
+  height: 2rem;
   padding: 0.5rem;
-  height: 2.375rem;
+  border-radius: 6px;
 
   background: ${(props) => props.theme.BASE_BUTTON};
-  border-radius: 6px;
 
   > button {
     display: flex;
     align-items: center;
-    justify-content: center;
 
-    width: 0.875rem;
-    height: 0.875rem;
-
-    border: 0;
     background: 0;
+    border: 0;
 
     color: ${(props) => props.theme.PURPLE};
+
     cursor: pointer;
   }
 
   > p {
-    color: ${(props) => props.theme.BASE_TITLE};
-    line-height: 130%;
-    width: 1.25rem;
-    height: 1.25rem;
-    font-size: 1rem;
-
-    text-align: center;
-    margin-top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.125rem;
   }
 `;
 
@@ -275,17 +268,87 @@ export const RemoveButton = styled.button`
   justify-content: center;
   gap: 0.25rem;
 
-  background: ${(props) => props.theme.BASE_BUTTON};
-  padding: 0.5rem;
+  height: 2rem;
+  padding: 0 0.5rem;
+
   border: 0;
   border-radius: 6px;
+  background: ${(props) => props.theme.BASE_BUTTON};
 
+  color: ${(props) => props.theme.PURPLE};
+  text-transform: uppercase;
+  line-height: 160%;
+
+  cursor: pointer;
+
+  > span {
+    color: ${(props) => props.theme.BASE_TEXT};
+    font-size: 0.75rem;
+  }
+`;
+
+export const ProductPrice = styled.p`
   color: ${(props) => props.theme.BASE_TEXT};
-  font-size: 0.75rem;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 130%;
+`;
+
+export const ValuesContainer = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+
+  padding: 1.5rem 0;
+`;
+
+export const AmountContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > p {
+    color: ${(props) => props.theme.BASE_TEXT};
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 130%;
+  }
+
+  > p:first-child {
+    font-size: 0.875rem;
+  }
+`;
+
+export const TotalContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  > p {
+    color: ${(props) => props.theme.BASE_SUBTITLE};
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 130%;
+  }
+`;
+
+export const CheckoutButton = styled.button`
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 0;
+  background: ${(props) => props.theme.YELLOW};
+  padding: 0.75rem;
+  border-radius: 6px;
+
+  color: ${(props) => props.theme.WHITE};
+  font-size: 0.875rem;
+  font-weight: 700;
   line-height: 160%;
   text-transform: uppercase;
-
-  height: 2.375rem;
 
   cursor: pointer;
 `;
