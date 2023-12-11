@@ -235,4 +235,10 @@ export const BuyButton = styled.button`
   color: ${(props) => props.theme.BASE_CARD};
 
   cursor: pointer;
+
+  transition: all 100ms ease-in-out;
+
+  &:hover {
+    background: ${(props) => props.theme.PURPLE};
+  }
 `;

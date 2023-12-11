@@ -20,7 +20,7 @@ import {
   FormContainer,
   NeighborhoodInput,
   NumberInput,
-  OptionCard,
+  OptionButton,
   PaymentContainer,
   PaymentOptions,
   Product,
@@ -84,17 +84,17 @@ export function Checkout() {
           </PuchaseDetailsHeaderContainer>
 
           <PaymentOptions>
-            <OptionCard>
+            <OptionButton>
               <CreditCard size={16} /> Cartão de crédito
-            </OptionCard>
+            </OptionButton>
 
-            <OptionCard>
+            <OptionButton>
               <Bank size={16} /> cartão de débito
-            </OptionCard>
+            </OptionButton>
 
-            <OptionCard>
+            <OptionButton>
               <Money size={16} /> dinheiro
-            </OptionCard>
+            </OptionButton>
           </PaymentOptions>
         </PaymentContainer>
       </PurchaseDetailsContainer>

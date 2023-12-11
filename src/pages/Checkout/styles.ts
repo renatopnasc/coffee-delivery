@@ -99,6 +99,10 @@ const BaseInput = styled.input`
     font-size: 0.875rem;
     line-height: 130%;
   }
+
+  &:focus {
+    border: 1px solid ${(props) => props.theme.YELLOW_DARK};
+  }
 `;
 
 export const CepInput = styled(BaseInput)`
@@ -150,7 +154,7 @@ export const PaymentOptions = styled.div`
   gap: 0.75rem;
 `;
 
-export const OptionCard = styled.button`
+export const OptionButton = styled.button`
   background: ${(props) => props.theme.BASE_BUTTON};
 
   display: flex;
@@ -169,8 +173,14 @@ export const OptionCard = styled.button`
 
   cursor: pointer;
 
+  transition: all 100ms ease-in-out;
+
   > svg {
     color: ${(props) => props.theme.PURPLE};
+  }
+
+  &:hover {
+    background: ${(props) => props.theme.BASE_HOVER};
   }
 `;
 
@@ -252,6 +262,12 @@ export const Counter = styled.div`
     color: ${(props) => props.theme.PURPLE};
 
     cursor: pointer;
+
+    transition: all 100ms ease-in-out;
+
+    &:hover {
+      color: ${(props) => props.theme.PURPLE_DARK};
+    }
   }
 
   > p {
@@ -281,9 +297,15 @@ export const RemoveButton = styled.button`
 
   cursor: pointer;
 
+  transition: all 100ms ease-in-out;
+
   > span {
     color: ${(props) => props.theme.BASE_TEXT};
     font-size: 0.75rem;
+  }
+
+  &:hover {
+    background: ${(props) => props.theme.BASE_HOVER};
   }
 `;
 
@@ -351,4 +373,10 @@ export const CheckoutButton = styled.button`
   text-transform: uppercase;
 
   cursor: pointer;
+
+  transition: all 100ms ease-in-out;
+
+  &:hover {
+    background: ${(props) => props.theme.YELLOW_DARK};
+  }
 `;
