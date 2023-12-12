@@ -42,7 +42,15 @@ import {
 // Images Import
 import coffee1 from "../../assets/svg/coffee1.svg";
 
+import { useNavigate } from "react-router-dom";
+
 export function Checkout() {
+  const navigate = useNavigate();
+
+  function handleCheckout() {
+    navigate("/success");
+  }
+
   return (
     <CheckoutContainer>
       <PurchaseDetailsContainer>
@@ -151,7 +159,9 @@ export function Checkout() {
               </TotalContainer>
             </ValuesContainer>
 
-            <CheckoutButton>confirmar pedido</CheckoutButton>
+            <CheckoutButton onClick={handleCheckout}>
+              confirmar pedido
+            </CheckoutButton>
           </footer>
         </ProductsContainer>
       </SelectedProductsContainer>
