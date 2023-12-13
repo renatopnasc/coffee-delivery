@@ -62,10 +62,36 @@ export const CartButton = styled(NavLink)`
 
   color: ${(props) => props.theme.YELLOW_DARK};
 
+  position: relative;
+
   svg {
     width: 1.375rem;
     height: 1.375rem;
   }
 
   cursor: pointer;
+`;
+
+export const ProductCartCounter = styled.div`
+  width: 1.125rem;
+  height: 1.125rem;
+
+  border-radius: 999px;
+  background: ${(props) => props.theme.YELLOW_DARK};
+
+  position: absolute;
+  top: -8px;
+  right: -8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: ${(props) => props.theme.WHITE};
+  font-size: 0.75rem;
+  font-weight: 700;
+
+  letter-spacing: 0.28px;
+
+  text-align: center;
 `;

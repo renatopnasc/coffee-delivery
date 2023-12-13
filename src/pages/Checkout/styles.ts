@@ -37,6 +37,74 @@ export const AddressContainer = styled.section`
   gap: 2rem;
 `;
 
+export const ClientDataFormContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-gap: 1rem;
+  grid-template-areas:
+    "cep cep cep cep cep cep"
+    "street street street street street street"
+    "number number complement complement complement complement"
+    "neighborhood neighborhood city city city uf";
+`;
+
+const BaseInput = styled.input`
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+
+  border-radius: 4px;
+  border: 1px solid ${(props) => props.theme.BASE_BUTTON};
+  background: ${(props) => props.theme.BASE_INPUT};
+
+  padding: 0.75rem;
+
+  color: ${(props) => props.theme.BASE_TEXT};
+
+  ::placeholder {
+    color: ${(props) => props.theme.BASE_LABEL};
+    font-size: 0.875rem;
+    line-height: 130%;
+  }
+
+  &:focus {
+    border: 1px solid ${(props) => props.theme.YELLOW_DARK};
+  }
+`;
+
+export const CepInput = styled(BaseInput)`
+  grid-area: cep;
+  grid-column: 1 / 3;
+`;
+
+export const StreetInput = styled(BaseInput)`
+  grid-area: street;
+`;
+
+export const NumberInput = styled(BaseInput)`
+  grid-area: number;
+  grid-column: 1 / 3;
+`;
+
+// TODO: fazer ele ser opcional
+export const ComplementInput = styled(BaseInput)`
+  grid-area: complement;
+`;
+
+export const NeighborhoodInput = styled(BaseInput)`
+  grid-area: neighborhood;
+`;
+
+export const CityInput = styled(BaseInput)`
+  grid-area: city;
+`;
+
+export const UfInput = styled(BaseInput)`
+  grid-area: uf;
+`;
+
 export const PurchaseDetailsHeaderContainer = styled.header`
   display: flex;
   align-items: flex-start;
@@ -65,6 +133,59 @@ export const PurchaseDetailsHeaderContainer = styled.header`
       font-weight: 400;
       line-height: 130%;
     }
+  }
+`;
+
+export const PaymentContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  padding: 2.5rem;
+  background: ${(props) => props.theme.BASE_CARD};
+  border-radius: 6px;
+`;
+
+export const PaymentOptions = styled.div`
+  width: 100%;
+
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
+`;
+
+export const OptionButton = styled.button`
+  background: ${(props) => props.theme.BASE_BUTTON};
+
+  display: flex;
+  align-items: center;
+
+  gap: 0.75rem;
+
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid transparent;
+
+  color: ${(props) => props.theme.BASE_TEXT};
+  font-size: 0.75rem;
+  line-height: 160%;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition: all 100ms ease-in-out;
+
+  > svg {
+    color: ${(props) => props.theme.PURPLE};
+  }
+
+  &:hover {
+    background: ${(props) => props.theme.BASE_HOVER};
+  }
+
+  &.selected {
+    background: ${(props) => props.theme.PURPLE_LIGHT};
+    border: 1px solid ${(props) => props.theme.PURPLE};
   }
 `;
 
@@ -260,7 +381,12 @@ export const CheckoutButton = styled.button`
 
   transition: all 100ms ease-in-out;
 
-  &:hover {
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+
+  &:not(:disabled):hover {
     background: ${(props) => props.theme.YELLOW_DARK};
   }
 `;

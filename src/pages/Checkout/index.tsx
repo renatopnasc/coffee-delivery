@@ -1,10 +1,28 @@
-import { MapPinLine, Minus, Plus, Trash } from "phosphor-react";
+import {
+  Bank,
+  CreditCard,
+  CurrencyDollar,
+  MapPinLine,
+  Minus,
+  Money,
+  Plus,
+  Trash,
+} from "phosphor-react";
 import {
   AddressContainer,
   AmountContainer,
+  CepInput,
   CheckoutButton,
   CheckoutContainer,
+  CityInput,
+  ClientDataFormContainer,
+  ComplementInput,
   Counter,
+  NeighborhoodInput,
+  NumberInput,
+  OptionButton,
+  PaymentContainer,
+  PaymentOptions,
   Product,
   ProductActions,
   ProductDetails,
@@ -15,22 +33,35 @@ import {
   PurchaseDetailsHeaderContainer,
   RemoveButton,
   SelectedProductsContainer,
+  StreetInput,
   TotalContainer,
+  UfInput,
   ValuesContainer,
 } from "./styles";
 
 // Images Import
-import coffee1 from "../../assets/svg/coffee1.svg";
 
 import { useNavigate } from "react-router-dom";
-import { ClientDataForm } from "./components/ClientDataForm";
-import { Payment } from "./components/Payment";
+import { useContext, useState } from "react";
+import { OrderContext } from "../../contexts/OrderContext";
+
+type PaymentOptionType = "credit" | "debit" | "cash";
 
 export function Checkout() {
+  const [paymentOption, setPaymentOption] = useState<PaymentOptionType | null>(
+    null
+  );
+
+  const { productsList } = useContext(OrderContext);
+
   const navigate = useNavigate();
 
   function handleCheckout() {
     navigate("/success");
+  }
+
+  function handlePaymentOption(option: PaymentOptionType) {
+    setPaymentOption(option);
   }
 
   return (
@@ -49,11 +80,56 @@ export function Checkout() {
           </PurchaseDetailsHeaderContainer>
 
           <form action="">
-            <ClientDataForm />
+            <ClientDataFormContainer>
+              <CepInput type="text" placeholder="CEP" />
+              <StreetInput placeholder="Rua" />
+              <NumberInput placeholder="Número" />
+              <ComplementInput placeholder="Complemento" />
+              <NeighborhoodInput placeholder="Bairro" />
+              <CityInput placeholder="Cidade" />
+              <UfInput placeholder="UF" />
+            </ClientDataFormContainer>
           </form>
         </AddressContainer>
 
-        <Payment />
+        <PaymentContainer>
+          <PurchaseDetailsHeaderContainer>
+            <CurrencyDollar size={22} color="#8047f8" />
+
+            <div>
+              <h2>Pagamento</h2>
+              <p>
+                O pagamento é feito na entrega. Escolha a forma que deseja pagar
+              </p>
+            </div>
+          </PurchaseDetailsHeaderContainer>
+
+          <PaymentOptions>
+            <OptionButton
+              onClick={() => handlePaymentOption("credit")}
+              className={paymentOption === "credit" ? "selected" : ""}
+              title="Cartão de crédito"
+            >
+              <CreditCard size={16} /> Cartão de crédito
+            </OptionButton>
+
+            <OptionButton
+              onClick={() => handlePaymentOption("debit")}
+              className={paymentOption === "debit" ? "selected" : ""}
+              title="Cartão de débito"
+            >
+              <Bank size={16} /> cartão de débito
+            </OptionButton>
+
+            <OptionButton
+              onClick={() => handlePaymentOption("cash")}
+              className={paymentOption === "cash" ? "selected" : ""}
+              title="Dinheiro"
+            >
+              <Money size={16} /> dinheiro
+            </OptionButton>
+          </PaymentOptions>
+        </PaymentContainer>
       </PurchaseDetailsContainer>
 
       <SelectedProductsContainer>
@@ -61,35 +137,37 @@ export function Checkout() {
 
         <ProductsContainer>
           <section>
-            <Product>
-              <ProductInfo>
-                <img src={coffee1} alt="" />
+            {productsList.map((product) => (
+              <Product>
+                <ProductInfo>
+                  <img src={product.photo} alt="" />
 
-                <ProductDetails>
-                  <h1>Expresso Tradicional</h1>
+                  <ProductDetails>
+                    <h1>{product.name}</h1>
 
-                  <ProductActions>
-                    <Counter>
-                      <button>
-                        <Minus size={14} weight="bold" />
-                      </button>
-                      <p>1</p>
-                      <button>
-                        <Plus size={14} weight="bold" />
-                      </button>
-                    </Counter>
+                    <ProductActions>
+                      <Counter>
+                        <button>
+                          <Minus size={14} weight="bold" />
+                        </button>
+                        <p>{product.quantityOfProduct}</p>
+                        <button>
+                          <Plus size={14} weight="bold" />
+                        </button>
+                      </Counter>
 
-                    <RemoveButton title="Remover produto">
-                      <Trash size={16} />
+                      <RemoveButton title="Remover produto">
+                        <Trash size={16} />
 
-                      <span>remover</span>
-                    </RemoveButton>
-                  </ProductActions>
-                </ProductDetails>
-              </ProductInfo>
+                        <span>remover</span>
+                      </RemoveButton>
+                    </ProductActions>
+                  </ProductDetails>
+                </ProductInfo>
 
-              <ProductPrice>R$ 9,90</ProductPrice>
-            </Product>
+                <ProductPrice>R$ {product.price}</ProductPrice>
+              </Product>
+            ))}
           </section>
 
           <footer>
@@ -108,7 +186,10 @@ export function Checkout() {
               </TotalContainer>
             </ValuesContainer>
 
-            <CheckoutButton onClick={handleCheckout}>
+            <CheckoutButton
+              disabled={paymentOption === null}
+              onClick={handleCheckout}
+            >
               confirmar pedido
             </CheckoutButton>
           </footer>

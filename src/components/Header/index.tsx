@@ -3,14 +3,19 @@ import {
   ActionsHeaderContainer,
   LocationButton,
   CartButton,
+  ProductCartCounter,
 } from "./styles";
 
 // Images imports
 import logo from "../../assets/svg/logo.svg";
 import { MapPin, ShoppingCart } from "phosphor-react";
 import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { OrderContext } from "../../contexts/OrderContext";
 
 export function Header() {
+  const { productsList } = useContext(OrderContext);
+
   return (
     <HeaderContainer>
       <NavLink to="/">
@@ -25,6 +30,10 @@ export function Header() {
 
         <CartButton to="checkout" title="Checkout">
           <ShoppingCart weight="fill" />
+
+          {productsList.length > 0 && (
+            <ProductCartCounter>{productsList.length}</ProductCartCounter>
+          )}
         </CartButton>
       </ActionsHeaderContainer>
     </HeaderContainer>
