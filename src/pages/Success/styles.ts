@@ -37,6 +37,10 @@ export const OrderDetailsContainer = styled.section`
 `;
 
 export const OrderInfoContainer = styled.div`
+  max-width: 32.875rem;
+
+  flex: 1;
+
   display: flex;
   flex-direction: column;
   gap: 2rem;

@@ -4,6 +4,7 @@ import coffe3 from "../assets/svg/coffee3.svg";
 import coffe4 from "../assets/svg/coffee4.svg";
 
 type ProductType = {
+  id: number;
   photo: string;
   name: string;
   type: string;
@@ -13,6 +14,7 @@ type ProductType = {
 
 export const productList: ProductType[] = [
   {
+    id: 1,
     photo: coffe1,
     name: "Expresso Tradicional",
     type: "tradicional",
@@ -20,6 +22,7 @@ export const productList: ProductType[] = [
     price: "9,90",
   },
   {
+    id: 2,
     photo: coffe2,
     name: "Expresso Americano",
     type: "tradicional",
@@ -27,6 +30,7 @@ export const productList: ProductType[] = [
     price: "9,90",
   },
   {
+    id: 3,
     photo: coffe3,
     name: "Expresso Cremoso",
     type: "tradicional",
@@ -34,6 +38,7 @@ export const productList: ProductType[] = [
     price: "9,90",
   },
   {
+    id: 4,
     photo: coffe4,
     name: "Expresso Gelado",
     type: "tradicional",

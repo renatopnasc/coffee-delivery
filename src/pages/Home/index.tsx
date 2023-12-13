@@ -1,16 +1,8 @@
 import {
-  ActionsContainer,
-  BuyButton,
-  BuyOptionsContainer,
-  CoffeeListContainer,
-  Counter,
   HomeContainer,
   IntroContainer,
   Item,
-  ItemCard,
   ItemsDescriptionContainer,
-  List,
-  Price,
   StoreDescriptionContainer,
   TitleContainer,
 } from "./styles";
@@ -21,9 +13,7 @@ import cartIcon from "../../assets/svg/icons/cart.svg";
 import boxIcon from "../../assets/svg/icons/box.svg";
 import timerIcon from "../../assets/svg/icons/timer.svg";
 import coffeeIcon from "../../assets/svg/icons/coffee.svg";
-import { Minus, Plus, ShoppingCart } from "phosphor-react";
-
-import { productList } from "../../utils/items";
+import { CoffeeList } from "./components/CoffeeList";
 
 export function Home() {
   return (
@@ -65,45 +55,7 @@ export function Home() {
         </StoreDescriptionContainer>
       </IntroContainer>
 
-      <CoffeeListContainer>
-        <h2>Nossos cafés</h2>
-
-        <List>
-          {productList.map((product) => (
-            <ItemCard>
-              <img src={product.photo} />
-
-              <span>{product.type}</span>
-
-              <h1>{product.name}</h1>
-
-              <p>{product.description}</p>
-
-              <BuyOptionsContainer>
-                <Price>
-                  R$ <span>{product.price}</span>
-                </Price>
-
-                <ActionsContainer>
-                  <Counter>
-                    <button>
-                      <Minus weight="bold" />
-                    </button>
-                    <p>1</p>
-                    <button>
-                      <Plus weight="bold" />
-                    </button>
-                  </Counter>
-
-                  <BuyButton title="Comprar">
-                    <ShoppingCart size={22} weight="fill" />
-                  </BuyButton>
-                </ActionsContainer>
-              </BuyOptionsContainer>
-            </ItemCard>
-          ))}
-        </List>
-      </CoffeeListContainer>
+      <CoffeeList />
     </HomeContainer>
   );
 }
