@@ -21,8 +21,9 @@ import cartIcon from "../../assets/svg/icons/cart.svg";
 import boxIcon from "../../assets/svg/icons/box.svg";
 import timerIcon from "../../assets/svg/icons/timer.svg";
 import coffeeIcon from "../../assets/svg/icons/coffee.svg";
-import coffee1 from "../../assets/svg/coffee1.svg";
 import { Minus, Plus, ShoppingCart } from "phosphor-react";
+
+import { productList } from "../../utils/items";
 
 export function Home() {
   return (
@@ -68,165 +69,39 @@ export function Home() {
         <h2>Nossos cafés</h2>
 
         <List>
-          <ItemCard>
-            <img src={coffee1} />
+          {productList.map((product) => (
+            <ItemCard>
+              <img src={product.photo} />
 
-            <span>tradicional</span>
+              <span>{product.type}</span>
 
-            <h1>Expresso Tradicional</h1>
+              <h1>{product.name}</h1>
 
-            <p>O tradicional café feito com água quente e grãos moídos</p>
+              <p>{product.description}</p>
 
-            <BuyOptionsContainer>
-              <Price>
-                R$ <span>9,90</span>
-              </Price>
+              <BuyOptionsContainer>
+                <Price>
+                  R$ <span>{product.price}</span>
+                </Price>
 
-              <ActionsContainer>
-                <Counter>
-                  <button>
-                    <Minus weight="bold" />
-                  </button>
-                  <p>1</p>
-                  <button>
-                    <Plus weight="bold" />
-                  </button>
-                </Counter>
+                <ActionsContainer>
+                  <Counter>
+                    <button>
+                      <Minus weight="bold" />
+                    </button>
+                    <p>1</p>
+                    <button>
+                      <Plus weight="bold" />
+                    </button>
+                  </Counter>
 
-                <BuyButton title="Comprar">
-                  <ShoppingCart size={22} weight="fill" />
-                </BuyButton>
-              </ActionsContainer>
-            </BuyOptionsContainer>
-          </ItemCard>
-
-          <ItemCard>
-            <img src={coffee1} />
-
-            <span>tradicional</span>
-
-            <h1>Expresso Tradicional</h1>
-
-            <p>O tradicional café feito com água quente e grãos moídos</p>
-
-            <BuyOptionsContainer>
-              <Price>
-                R$ <span>9,90</span>
-              </Price>
-
-              <ActionsContainer>
-                <Counter>
-                  <button>
-                    <Minus weight="bold" />
-                  </button>
-                  <p>1</p>
-                  <button>
-                    <Plus weight="bold" />
-                  </button>
-                </Counter>
-
-                <BuyButton title="Comprar">
-                  <ShoppingCart size={22} weight="fill" />
-                </BuyButton>
-              </ActionsContainer>
-            </BuyOptionsContainer>
-          </ItemCard>
-
-          <ItemCard>
-            <img src={coffee1} />
-
-            <span>tradicional</span>
-
-            <h1>Expresso Tradicional</h1>
-
-            <p>O tradicional café feito com água quente e grãos moídos</p>
-
-            <BuyOptionsContainer>
-              <Price>
-                R$ <span>9,90</span>
-              </Price>
-
-              <ActionsContainer>
-                <Counter>
-                  <button>
-                    <Minus weight="bold" />
-                  </button>
-                  <p>1</p>
-                  <button>
-                    <Plus weight="bold" />
-                  </button>
-                </Counter>
-
-                <BuyButton title="Comprar">
-                  <ShoppingCart size={22} weight="fill" />
-                </BuyButton>
-              </ActionsContainer>
-            </BuyOptionsContainer>
-          </ItemCard>
-
-          <ItemCard>
-            <img src={coffee1} />
-
-            <span>tradicional</span>
-
-            <h1>Expresso Tradicional</h1>
-
-            <p>O tradicional café feito com água quente e grãos moídos</p>
-
-            <BuyOptionsContainer>
-              <Price>
-                R$ <span>9,90</span>
-              </Price>
-
-              <ActionsContainer>
-                <Counter>
-                  <button>
-                    <Minus weight="bold" />
-                  </button>
-                  <p>1</p>
-                  <button>
-                    <Plus weight="bold" />
-                  </button>
-                </Counter>
-
-                <BuyButton title="Comprar">
-                  <ShoppingCart size={22} weight="fill" />
-                </BuyButton>
-              </ActionsContainer>
-            </BuyOptionsContainer>
-          </ItemCard>
-
-          <ItemCard>
-            <img src={coffee1} />
-
-            <span>tradicional</span>
-
-            <h1>Expresso Tradicional</h1>
-
-            <p>O tradicional café feito com água quente e grãos moídos</p>
-
-            <BuyOptionsContainer>
-              <Price>
-                R$ <span>9,90</span>
-              </Price>
-
-              <ActionsContainer>
-                <Counter>
-                  <button>
-                    <Minus weight="bold" />
-                  </button>
-                  <p>1</p>
-                  <button>
-                    <Plus weight="bold" />
-                  </button>
-                </Counter>
-
-                <BuyButton title="Comprar">
-                  <ShoppingCart size={22} weight="fill" />
-                </BuyButton>
-              </ActionsContainer>
-            </BuyOptionsContainer>
-          </ItemCard>
+                  <BuyButton title="Comprar">
+                    <ShoppingCart size={22} weight="fill" />
+                  </BuyButton>
+                </ActionsContainer>
+              </BuyOptionsContainer>
+            </ItemCard>
+          ))}
         </List>
       </CoffeeListContainer>
     </HomeContainer>
