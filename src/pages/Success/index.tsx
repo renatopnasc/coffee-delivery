@@ -17,7 +17,7 @@ import { useContext } from "react";
 import { OrderContext } from "../../contexts/OrderContext";
 
 export function Success() {
-  const { paymentOption } = useContext(OrderContext);
+  const { paymentOption, clientData } = useContext(OrderContext);
   return (
     <SuccessContainer>
       <TitleContainer>
@@ -31,9 +31,15 @@ export function Success() {
             <img src={locationIcon} />
             <Info>
               <p>
-                Entrega em <span>Rua João Daniel Martinelli, 102</span>
+                Entrega em{" "}
+                <span>
+                  {clientData.street}, {clientData.number}
+                </span>
               </p>
-              <p>Farrapos - Porto Alegre, RS</p>
+              <p>
+                {clientData.neighborhood} - {clientData.city},{" "}
+                {clientData.state}
+              </p>
             </Info>
           </InfoContainer>
 

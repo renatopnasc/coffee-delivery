@@ -12,12 +12,24 @@ interface OrderListProps {
   quantityOfProduct: number;
 }
 
+interface AddressFormData {
+  number: string;
+  state: string;
+  cep: string;
+  street: string;
+  complement: string;
+  neighborhood: string;
+  city: string;
+}
+
 interface OrderContextType {
+  clientData: AddressFormData;
   productsList: OrderListProps[];
   paymentOption: PaymentOptionType | null;
   addProductToOrderList: (product: OrderListProps) => void;
   removeProductToOrderList: (id: number) => void;
   handlePaymentOption: (option: PaymentOptionType) => void;
+  createNewClientData: (data: AddressFormData) => void;
 }
 
 export const OrderContext = createContext({} as OrderContextType);
@@ -29,6 +41,10 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
 
   const [paymentOption, setPaymentOption] = useState<PaymentOptionType | null>(
     null
+  );
+
+  const [clientData, setClientData] = useState<AddressFormData>(
+    {} as AddressFormData
   );
 
   function handlePaymentOption(option: PaymentOptionType) {
@@ -44,14 +60,20 @@ export function OrderContextProvider({ children }: OrderContextProviderProps) {
     setProductList(newProductList);
   }
 
+  function createNewClientData(data: AddressFormData) {
+    setClientData(data);
+  }
+
   return (
     <OrderContext.Provider
       value={{
+        clientData,
         productsList,
         paymentOption,
         addProductToOrderList,
         removeProductToOrderList,
         handlePaymentOption,
+        createNewClientData,
       }}
     >
       {children}

@@ -44,19 +44,53 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { OrderContext } from "../../contexts/OrderContext";
+import { useForm } from "react-hook-form";
+
+import * as zod from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+const newAddressFormValidationSchema = zod.object({
+  cep: zod.string().min(8).max(8),
+  street: zod.string(),
+  number: zod.string().max(3),
+  complement: zod.string(),
+  neighborhood: zod.string(),
+  city: zod.string(),
+  state: zod.string().min(2).max(2),
+});
+
+type NewAddressFormType = zod.infer<typeof newAddressFormValidationSchema>;
 
 export function Checkout() {
+  const newAddressForm = useForm<NewAddressFormType>({
+    resolver: zodResolver(newAddressFormValidationSchema),
+    defaultValues: {
+      cep: "",
+      street: "",
+      number: "",
+      complement: "",
+      neighborhood: "",
+      city: "",
+      state: "",
+    },
+  });
+
+  const { register, handleSubmit } = newAddressForm;
+
   const {
     productsList,
     paymentOption,
     removeProductToOrderList,
     handlePaymentOption,
+    createNewClientData,
   } = useContext(OrderContext);
 
   const navigate = useNavigate();
 
-  function handleCheckout() {
+  function onSubmit(data: NewAddressFormType) {
     navigate("/success");
+
+    createNewClientData(data);
   }
 
   return (
@@ -74,15 +108,21 @@ export function Checkout() {
             </div>
           </PurchaseDetailsHeaderContainer>
 
-          <form action="">
+          <form id="addressForm" action="" onSubmit={handleSubmit(onSubmit)}>
             <ClientDataFormContainer>
-              <CepInput type="text" placeholder="CEP" />
-              <StreetInput placeholder="Rua" />
-              <NumberInput placeholder="Número" />
-              <ComplementInput placeholder="Complemento" />
-              <NeighborhoodInput placeholder="Bairro" />
-              <CityInput placeholder="Cidade" />
-              <UfInput placeholder="UF" />
+              <CepInput type="text" placeholder="CEP" {...register("cep")} />
+              <StreetInput placeholder="Rua" {...register("street")} />
+              <NumberInput placeholder="Número" {...register("number")} />
+              <ComplementInput
+                placeholder="Complemento"
+                {...register("complement")}
+              />
+              <NeighborhoodInput
+                placeholder="Bairro"
+                {...register("neighborhood")}
+              />
+              <CityInput placeholder="Cidade" {...register("city")} />
+              <UfInput placeholder="UF" {...register("state")} />
             </ClientDataFormContainer>
           </form>
         </AddressContainer>
@@ -185,8 +225,9 @@ export function Checkout() {
             </ValuesContainer>
 
             <CheckoutButton
+              form="addressForm"
+              type="submit"
               disabled={paymentOption === null}
-              onClick={handleCheckout}
             >
               confirmar pedido
             </CheckoutButton>
