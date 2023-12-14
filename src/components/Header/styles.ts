@@ -87,11 +87,11 @@ export const ProductCartCounter = styled.div`
   align-items: center;
   justify-content: center;
 
-  color: ${(props) => props.theme.WHITE};
-  font-size: 0.75rem;
-  font-weight: 700;
-
-  letter-spacing: 0.28px;
-
-  text-align: center;
+  span {
+    color: ${(props) => props.theme.WHITE};
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: -0.72px;
+    text-align: center;
+  }
 `;

@@ -32,7 +32,9 @@ export function Header() {
           <ShoppingCart weight="fill" />
 
           {productsList.length > 0 && (
-            <ProductCartCounter>{productsList.length}</ProductCartCounter>
+            <ProductCartCounter>
+              <span>{productsList.length}</span>
+            </ProductCartCounter>
           )}
         </CartButton>
       </ActionsHeaderContainer>

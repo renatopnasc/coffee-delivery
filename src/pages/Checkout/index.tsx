@@ -42,26 +42,21 @@ import {
 // Images Import
 
 import { useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { OrderContext } from "../../contexts/OrderContext";
 
-type PaymentOptionType = "credit" | "debit" | "cash";
-
 export function Checkout() {
-  const [paymentOption, setPaymentOption] = useState<PaymentOptionType | null>(
-    null
-  );
-
-  const { productsList } = useContext(OrderContext);
+  const {
+    productsList,
+    paymentOption,
+    removeProductToOrderList,
+    handlePaymentOption,
+  } = useContext(OrderContext);
 
   const navigate = useNavigate();
 
   function handleCheckout() {
     navigate("/success");
-  }
-
-  function handlePaymentOption(option: PaymentOptionType) {
-    setPaymentOption(option);
   }
 
   return (
@@ -156,7 +151,10 @@ export function Checkout() {
                         </button>
                       </Counter>
 
-                      <RemoveButton title="Remover produto">
+                      <RemoveButton
+                        onClick={() => removeProductToOrderList(product.id)}
+                        title="Remover produto"
+                      >
                         <Trash size={16} />
 
                         <span>remover</span>

@@ -13,8 +13,11 @@ import timer from "../../assets/svg/icons/timer.svg";
 import payment from "../../assets/svg/icons/payment.svg";
 
 import deliveryImg from "../../assets/svg/delivery.svg";
+import { useContext } from "react";
+import { OrderContext } from "../../contexts/OrderContext";
 
 export function Success() {
+  const { paymentOption } = useContext(OrderContext);
   return (
     <SuccessContainer>
       <TitleContainer>
@@ -46,7 +49,9 @@ export function Success() {
             <img src={payment} />
             <Info>
               <p>Pagamneto na entrega</p>
-              <span>Cartão de Crédito</span>
+              {paymentOption === "credit" && <span>Cartão de Crédito</span>}
+              {paymentOption === "debit" && <span>Cartão de Débito</span>}
+              {paymentOption === "cash" && <span>Dinheiro</span>}
             </Info>
           </InfoContainer>
         </OrderInfoContainer>

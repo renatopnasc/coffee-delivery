@@ -68,5 +68,6 @@ export const Info = styled.div`
 
   span {
     font-weight: 700;
+    color: ${(props) => props.theme.BASE_TEXT};
   }
 `;
