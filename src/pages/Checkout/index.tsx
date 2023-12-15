@@ -42,7 +42,7 @@ import {
 // Images Import
 
 import { useNavigate } from "react-router-dom";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { OrderContext } from "../../contexts/OrderContext";
 import { useForm } from "react-hook-form";
 
@@ -74,6 +74,8 @@ export function Checkout() {
       state: "",
     },
   });
+
+  let totalWithoutDelivery: number = 0;
 
   const { register, handleSubmit } = newAddressForm;
 
@@ -110,7 +112,7 @@ export function Checkout() {
 
           <form id="addressForm" action="" onSubmit={handleSubmit(onSubmit)}>
             <ClientDataFormContainer>
-              <CepInput type="text" placeholder="CEP" {...register("cep")} />
+              <CepInput placeholder="CEP" {...register("cep")} />
               <StreetInput placeholder="Rua" {...register("street")} />
               <NumberInput placeholder="Número" {...register("number")} />
               <ComplementInput
@@ -172,47 +174,54 @@ export function Checkout() {
 
         <ProductsContainer>
           <section>
-            {productsList.map((product) => (
-              <Product>
-                <ProductInfo>
-                  <img src={product.photo} alt="" />
+            {productsList.map((product) => {
+              totalWithoutDelivery +=
+                product.quantityOfProduct *
+                Number(product.price.replace(",", "."));
+              return (
+                <Product key={product.id}>
+                  <ProductInfo>
+                    <img src={product.photo} alt="" />
 
-                  <ProductDetails>
-                    <h1>{product.name}</h1>
+                    <ProductDetails>
+                      <h1>{product.name}</h1>
 
-                    <ProductActions>
-                      <Counter>
-                        <button>
-                          <Minus size={14} weight="bold" />
-                        </button>
-                        <p>{product.quantityOfProduct}</p>
-                        <button>
-                          <Plus size={14} weight="bold" />
-                        </button>
-                      </Counter>
+                      <ProductActions>
+                        <Counter>
+                          <button>
+                            <Minus size={14} weight="bold" />
+                          </button>
+                          <p>{product.quantityOfProduct}</p>
+                          <button>
+                            <Plus size={14} weight="bold" />
+                          </button>
+                        </Counter>
 
-                      <RemoveButton
-                        onClick={() => removeProductToOrderList(product.id)}
-                        title="Remover produto"
-                      >
-                        <Trash size={16} />
+                        <RemoveButton
+                          onClick={() => removeProductToOrderList(product.id)}
+                          title="Remover produto"
+                        >
+                          <Trash size={16} />
 
-                        <span>remover</span>
-                      </RemoveButton>
-                    </ProductActions>
-                  </ProductDetails>
-                </ProductInfo>
+                          <span>remover</span>
+                        </RemoveButton>
+                      </ProductActions>
+                    </ProductDetails>
+                  </ProductInfo>
 
-                <ProductPrice>R$ {product.price}</ProductPrice>
-              </Product>
-            ))}
+                  <ProductPrice>R$ {product.price}</ProductPrice>
+                </Product>
+              );
+            })}
           </section>
 
           <footer>
             <ValuesContainer>
               <AmountContainer>
                 <p>Total dos itens</p>
-                <p>R$ 29,70</p>
+                <p>
+                  R$ {String(totalWithoutDelivery.toFixed(2)).replace(".", ",")}
+                </p>
               </AmountContainer>
               <AmountContainer>
                 <p>Entrega</p>
@@ -220,7 +229,13 @@ export function Checkout() {
               </AmountContainer>
               <TotalContainer>
                 <p>Total</p>
-                <p>R$ 33,20</p>
+                <p>
+                  R${" "}
+                  {String((totalWithoutDelivery + 3.5).toFixed(2)).replace(
+                    ".",
+                    ","
+                  )}
+                </p>
               </TotalContainer>
             </ValuesContainer>
 
